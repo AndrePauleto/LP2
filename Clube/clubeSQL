@@ -1,0 +1,135 @@
+-- Table: "Cartao"
+
+-- DROP TABLE "Cartao";
+
+CREATE TABLE "Cartao"
+(
+  id_cartao serial NOT NULL,
+  matricula character varying(255),
+  acessando boolean,
+  regra_id integer,
+  CONSTRAINT "Cartao_pkey" PRIMARY KEY (id_cartao),
+  CONSTRAINT "Cartao_regra_id_fkey" FOREIGN KEY (regra_id)
+      REFERENCES "Regra" (id_regra) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Cartao"
+  OWNER TO postgres;
+
+  
+  -- Table: "DiasDaSemana"
+
+-- DROP TABLE "DiasDaSemana";
+
+CREATE TABLE "DiasDaSemana"
+(
+  "id_diasDaSemana" serial NOT NULL,
+  monday boolean,
+  tuesday boolean,
+  wednesday boolean,
+  thursday boolean,
+  friday boolean,
+  saturday boolean,
+  sunday boolean,
+  CONSTRAINT "DiasDaSemana_pkey" PRIMARY KEY ("id_diasDaSemana")
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "DiasDaSemana"
+  OWNER TO postgres;
+  
+  
+  -- Table: "Funcionario"
+
+-- DROP TABLE "Funcionario";
+
+CREATE TABLE "Funcionario"
+(
+  id_funcionario serial NOT NULL,
+  nome character varying(100),
+  morada character varying(255),
+  idade integer,
+  login character varying(15),
+  senha character varying(15),
+  CONSTRAINT "Funcionario_pkey" PRIMARY KEY (id_funcionario)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Funcionario"
+  OWNER TO postgres;
+  
+  
+-- Table: "Log"
+
+-- DROP TABLE "Log";
+
+CREATE TABLE "Log"
+(
+  id_log serial NOT NULL,
+  socio_id integer,
+  data character varying(10),
+  hora character varying(5),
+  CONSTRAINT "Log_pkey" PRIMARY KEY (id_log),
+  CONSTRAINT "Log_socio_id_fkey" FOREIGN KEY (socio_id)
+      REFERENCES "Socio" (id_socio) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Log"
+  OWNER TO postgres;
+  
+  
+  -- Table: "Regra"
+
+-- DROP TABLE "Regra";
+
+CREATE TABLE "Regra"
+(
+  id_regra serial NOT NULL,
+  "nomeCartao" character varying(100),
+  "horaInicial" character varying(5),
+  "horaFinal" character varying(5),
+  "numeroAcessoDia" character varying(9),
+  valor real,
+  "diasDaSemana_id" integer,
+  CONSTRAINT "Regra_pkey" PRIMARY KEY (id_regra),
+  CONSTRAINT "Regra_diasDaSemana_id_fkey" FOREIGN KEY ("diasDaSemana_id")
+      REFERENCES "DiasDaSemana" ("id_diasDaSemana") MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Regra"
+  OWNER TO postgres;
+  
+  
+  -- Table: "Socio"
+
+-- DROP TABLE "Socio";
+
+CREATE TABLE "Socio"
+(
+  id_socio serial NOT NULL,
+  nome character varying(100),
+  morada character varying(255),
+  idade integer,
+  cartao_id integer,
+  CONSTRAINT "Socio_pkey" PRIMARY KEY (id_socio),
+  CONSTRAINT "Socio_cartao_id_fkey" FOREIGN KEY (cartao_id)
+      REFERENCES "Cartao" (id_cartao) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE "Socio"
+  OWNER TO postgres;
+  
