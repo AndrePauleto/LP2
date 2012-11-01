@@ -8,7 +8,11 @@ import java.util.HashSet;
 import es2.atividade2.model.Cartao;
 import es2.atividade2.model.DiasDaSemana;
 import es2.atividade2.model.Regra;
-
+/**
+ * 
+ * @author 181000711
+ *
+ */
 public class CartaoDAO extends DAO<es2.atividade2.model.Cartao>{
 
 	public CartaoDAO() {
