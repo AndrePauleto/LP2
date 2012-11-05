@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -9,6 +10,8 @@ import es2.atividade2.model.DiasDaSemana;
 
 public class DiasDaSemanaDAO extends DAO<es2.atividade2.model.DiasDaSemana> {
 
+	int ultimoId;
+	
 	public DiasDaSemanaDAO() {
 		super();
 		INSERT = "INSERT INTO \"DiasDaSemana\"(monday ,tuesday, wednesday, thursday, friday, saturday, sunday) VALUES(?,?,?,?,?,?,?)";
@@ -21,6 +24,7 @@ public class DiasDaSemanaDAO extends DAO<es2.atividade2.model.DiasDaSemana> {
 	@Override
 	public boolean insert(DiasDaSemana u) {
 		try {
+			ResultSet rs;
 			PS_INSERT.setBoolean(1, u.isMonday());
 			PS_INSERT.setBoolean(2, u.isTuesday());
 			PS_INSERT.setBoolean(3, u.isWednesday());
@@ -29,6 +33,13 @@ public class DiasDaSemanaDAO extends DAO<es2.atividade2.model.DiasDaSemana> {
 			PS_INSERT.setBoolean(6, u.isSaturday());
 			PS_INSERT.setBoolean(7, u.isSunday());
 			PS_INSERT.executeUpdate();
+			
+			rs = PS_INSERT.getGeneratedKeys();
+			while (rs.next()) {
+					ultimoId = rs.getInt(1);
+            } 
+            rs.close();
+			
 			PS_INSERT.clearParameters();
 		} catch (SQLException e) {
 			throw new RuntimeException("Erro no INSERT DiasDaSemana Erro!"
@@ -108,4 +119,7 @@ public class DiasDaSemanaDAO extends DAO<es2.atividade2.model.DiasDaSemana> {
         return diasDaSemana;
 	}
 
+	public int getUltimoId(){
+		return ultimoId;
+	}
 }

@@ -2,6 +2,11 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+
 import org.junit.Test;
 
 import dao.CartaoDAO;
@@ -30,14 +35,19 @@ public class CartaoTest {
 		System.out.println("Cartao cadastrada com Sucesso!");
 	}*/
 	
-	/*@Test(expected=IllegalArgumentException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testCartaoDAOSelect() {
+		
 		CartaoDAO cartaoDAO = new CartaoDAO();
 		cartaoDAO.conectar();		
-		System.out.println(cartaoDAO.select());
+		Collection<Cartao> c = cartaoDAO.select();		
+		
+		for (Cartao cartao : c) {
+			System.out.println(cartao.getMatricula());
+		}
 		cartaoDAO.desconectar();		
 		System.out.println("Select cartao com Sucesso!");
-	}*/
+	}
 	
 	/*@Test(expected=IllegalArgumentException.class)
 	public void testCartaoDAOSelectId() {

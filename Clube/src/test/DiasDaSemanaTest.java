@@ -11,7 +11,7 @@ import es2.atividade2.model.Funcionario;
 
 public class DiasDaSemanaTest {
 
-	/*@Test(expected=IllegalArgumentException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testDiasDaSemanaDAOInsert() {
 		DiasDaSemanaDAO diasDaSemanaDAO = new DiasDaSemanaDAO();
 		diasDaSemanaDAO.conectar();
@@ -20,7 +20,7 @@ public class DiasDaSemanaTest {
 		diasDaSemanaDAO.insert(u);
 		diasDaSemanaDAO.desconectar();		
 		System.out.println("DiasDaSemana cadastrado com Sucesso!");
-	}*/
+	}
 	
 	/*@Test(expected=IllegalArgumentException.class)
 	public void testDiasDaSemanaDAOSelect() {

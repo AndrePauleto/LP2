@@ -78,7 +78,7 @@ public class FuncionarioView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CadastrarRegraView cadastrarRegraView = new CadastrarRegraView();
-				cadastrarRegraView.setSize(320, 200);
+				cadastrarRegraView.setSize(620, 280);
 				cadastrarRegraView.setVisible(true);
 
 			}
@@ -92,7 +92,9 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				CadastrarCartaoView cadastrarCartaoView = new CadastrarCartaoView();
+				cadastrarCartaoView.setSize(620, 280);
+				cadastrarCartaoView.setVisible(true);
 
 			}
 		});

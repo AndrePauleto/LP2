@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.Properties;
 
@@ -43,7 +44,7 @@ public abstract class DAO<T> {
                 con = DriverManager.getConnection(url, user, psw);
                 
 
-                PS_INSERT = con.prepareStatement(INSERT);
+                PS_INSERT = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
                 PS_SELECT = con.prepareStatement(SELECT);
                 PS_SELECT_ID = con.prepareStatement(SELECT_ID);
                 PS_UPDATE = con.prepareStatement(UPDATE);
