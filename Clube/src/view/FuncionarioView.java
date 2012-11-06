@@ -93,7 +93,7 @@ public class FuncionarioView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCartaoView cadastrarCartaoView = new CadastrarCartaoView();
-				cadastrarCartaoView.setSize(620, 280);
+				cadastrarCartaoView.setSize(320, 280);
 				cadastrarCartaoView.setVisible(true);
 
 			}

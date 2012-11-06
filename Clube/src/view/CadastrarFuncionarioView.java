@@ -103,7 +103,9 @@ public class CadastrarFuncionarioView extends JFrame {
 							login, senha);
 					funcionarioDAO.insert(f);
 					funcionarioDAO.desconectar();
+					
 					limpaCampos();
+					
 					JOptionPane.showMessageDialog(null,
 							"Funcionário Cadastrado com Sucesso", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);

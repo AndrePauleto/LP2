@@ -50,13 +50,13 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 	boolean saturday = true;
 	boolean sunday = true;
 
-	
+	//FIXME mudar de TextField para ComboBox os campos Hora Inicial e Hora Final
 	private JLabel lblNomeCartao;
 	private JLabel lblHoraInicial;
 	private JLabel lblHoraFinal;
 	private JLabel lblNumeroAcessoDia;
 	private JLabel lblValor;
-	private JTextField txtNomeCartao;
+	private JTextField txtNomeCartao;	
 	private JTextField txtHoraInicial;
 	private JTextField txtHoraFinal;
 	private JTextField txtNumeroAcessoDia;
@@ -82,6 +82,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 
 		setTitle("SysClub - Cadastra Regra");
 
+		//---------- Instancia CheckBox ------------
 		cbxSegunda = new JCheckBox("Segunda");
 		cbxSegunda.setMnemonic(KeyEvent.VK_S);
 		cbxSegunda.setSelected(true);
@@ -117,6 +118,8 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		cbxDomingo.setSelected(true);
 		cbxDomingo.addItemListener(this);
 
+		
+		//---------- Instancia Label/TextField------------
 		lblNomeCartao = new JLabel();
 		lblNomeCartao.setText("Nome do Cartão:");
 		txtNomeCartao = new JTextField(15);
@@ -137,10 +140,14 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		lblValor.setText("Valor:");
 		txtValor = new JTextField(15);
 		
+		
+		//---------- Instancia Botões ------------
 		cadastrar = new JButton("Cadastrar");
 		cancelar = new JButton("Cancelar");
 		this.getRootPane().setDefaultButton(cadastrar);
-
+		
+		
+		//------------ Preenche dados nos paineis --------------
 		JPanel fundo = new JPanel();
 		
 		
@@ -233,6 +240,8 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 					regraDAO.insert(r);
 					regraDAO.desconectar();					
 					
+					limpaCampos();
+					
 					JOptionPane.showMessageDialog(null,
 							"Regra cadastrada com Sucesso", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -253,5 +262,13 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		numeroAcessoDia = txtNumeroAcessoDia.getText();
 		valor = Double.parseDouble(txtValor.getText());
 
+	}
+	
+	private void limpaCampos() {
+		txtNomeCartao.setText("");
+		txtHoraInicial.setText("");
+		txtHoraFinal.setText("");
+		txtNumeroAcessoDia.setText("");
+		txtValor.setText("");
 	}
 }
