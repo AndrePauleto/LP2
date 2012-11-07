@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import dao.FuncionarioDAO;
 import es2.atividade2.model.Funcionario;
 
-public class EditarFuncionarioView extends JPanel{
+public class EditarFuncionarioView extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	String[] colunas = { "Nome", "Morada", "Login", "Senha" };
@@ -19,7 +20,7 @@ public class EditarFuncionarioView extends JPanel{
 	private JPanel tabela;
 
 	public EditarFuncionarioView() {
-		
+		montaTabela();
 	}
 
 	private void preencheDados() {

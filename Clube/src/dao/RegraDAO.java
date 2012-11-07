@@ -10,6 +10,8 @@ import es2.atividade2.model.Regra;
 
 public class RegraDAO extends DAO<es2.atividade2.model.Regra>{
 	
+	int ultimoId;
+	
 	public RegraDAO() {
 		super();
         INSERT = "INSERT INTO \"Regra\"(\"nomeCartao\", \"horaInicial\", \"horaFinal\", \"numeroAcessoDia\", valor, \"diasDaSemana_id\") VALUES(?,?,?,?,?,?)";
@@ -22,6 +24,7 @@ public class RegraDAO extends DAO<es2.atividade2.model.Regra>{
 	@Override
 	public boolean insert(Regra u) {
 		try {
+			ResultSet rs;
 			PS_INSERT.setString(1, u.getNomeCartao());
 			PS_INSERT.setString(2, u.getHoraInicial());
 			PS_INSERT.setString(3, u.getHoraFinal());
@@ -29,6 +32,13 @@ public class RegraDAO extends DAO<es2.atividade2.model.Regra>{
 			PS_INSERT.setDouble(5, u.getValor());
 			PS_INSERT.setInt(6, u.getDiasDaSemana().getId());
 			PS_INSERT.executeUpdate();
+			
+			rs = PS_INSERT.getGeneratedKeys();
+			while (rs.next()) {
+					ultimoId = rs.getInt(1);
+            } 
+            rs.close();
+			
 			PS_INSERT.clearParameters();			
 		} catch (SQLException e) {
             throw new RuntimeException("Erro no INSERT Regra Erro! "
@@ -114,6 +124,10 @@ public class RegraDAO extends DAO<es2.atividade2.model.Regra>{
         }
 
         return regra;
+	}
+	
+	public int getUltimoId(){
+		return ultimoId;
 	}
 
 }

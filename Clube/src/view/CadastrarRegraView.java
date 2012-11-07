@@ -148,8 +148,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		
 		
 		//------------ Preenche dados nos paineis --------------
-		JPanel fundo = new JPanel();
-		
+		JPanel fundo = new JPanel();		
 		
 		JPanel checkPanel = new JPanel(new GridLayout(4, 2));
 		checkPanel.setBorder(new TitledBorder("Dias Da Semana"));
@@ -226,7 +225,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 					DiasDaSemana u = new DiasDaSemana(1, monday, tuesday, wednesday,
 							thursday, friday, saturday, sunday);
 					diasDaSemanaDAO.conectar();
-					diasDaSemanaDAO.insert(u);	
+					diasDaSemanaDAO.insert(u);						
 					DiasDaSemana d = diasDaSemanaDAO.select(diasDaSemanaDAO.getUltimoId());
 					diasDaSemanaDAO.desconectar();
 					
@@ -258,7 +257,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 	private void getCampos() {
 		nomeCartao = txtNomeCartao.getText();
 		horaInicial = txtHoraInicial.getText();
-		horaFinal = txtHoraFinal.getText();//Integer.parseInt(txtIdade.getText());
+		horaFinal = txtHoraFinal.getText();
 		numeroAcessoDia = txtNumeroAcessoDia.getText();
 		valor = Double.parseDouble(txtValor.getText());
 

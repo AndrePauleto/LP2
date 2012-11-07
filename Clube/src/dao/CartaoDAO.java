@@ -15,6 +15,8 @@ import es2.atividade2.model.Regra;
  */
 public class CartaoDAO extends DAO<es2.atividade2.model.Cartao>{
 
+	int ultimoId;
+	
 	public CartaoDAO() {
 		super();
         INSERT = "INSERT INTO \"Cartao\"(matricula, acessando, regra_id) VALUES(?,?,?)";
@@ -28,10 +30,18 @@ public class CartaoDAO extends DAO<es2.atividade2.model.Cartao>{
 	@Override
 	public boolean insert(Cartao u) {
 		try {
+			ResultSet rs;
 			PS_INSERT.setString(1, u.getMatricula());
 			PS_INSERT.setBoolean(2, u.isAcessando());
 			PS_INSERT.setInt(3, u.getRegra().getId());
 			PS_INSERT.executeUpdate();
+			
+			rs = PS_INSERT.getGeneratedKeys();
+			while (rs.next()) {
+					ultimoId = rs.getInt(1);
+            } 
+            rs.close();
+			
 			PS_INSERT.clearParameters();			
 		} catch (SQLException e) {
             throw new RuntimeException("Erro no INSERT Cartao Erro! "
@@ -114,6 +124,11 @@ public class CartaoDAO extends DAO<es2.atividade2.model.Cartao>{
         }
 
         return cartao;
+	}
+
+
+	public int getUltimoId() {
+		return ultimoId;
 	}
 
 }

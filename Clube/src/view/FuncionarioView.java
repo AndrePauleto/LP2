@@ -9,7 +9,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-
 public class FuncionarioView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,26 +24,24 @@ public class FuncionarioView extends JFrame {
 		JMenu menu;
 
 		menu = new JMenu("Arquivo");
-		
+
 		item = new JMenuItem("Principal");
 		item.addActionListener(new AbstractAction() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		menu.add(item);
-		
-		
+
 		item = new JMenuItem("Sair");
 		item.addActionListener(new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showConfirmDialog(null,
-						"Deseja sair do programa") == 0) {
+				if (JOptionPane.showConfirmDialog(null,"Deseja sair do programa", "Info Sys" , JOptionPane.YES_NO_OPTION) == 0) {
 					dispose();
 				}
 			}
@@ -61,10 +58,10 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CadastrarFuncionarioView cadastrarFuncionarioView = new CadastrarFuncionarioView();				
+				CadastrarFuncionarioView cadastrarFuncionarioView = new CadastrarFuncionarioView();
 				cadastrarFuncionarioView.setSize(350, 200);
-				cadastrarFuncionarioView.setVisible(true);					
-				//cadastrarFuncionarioView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				cadastrarFuncionarioView.setVisible(true);
+				// cadastrarFuncionarioView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 			}
 		});
@@ -85,21 +82,6 @@ public class FuncionarioView extends JFrame {
 		});
 		menu.add(item);
 
-		item = new JMenuItem("Cartão");
-		item.addActionListener(new AbstractAction() {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				CadastrarCartaoView cadastrarCartaoView = new CadastrarCartaoView();
-				cadastrarCartaoView.setSize(320, 280);
-				cadastrarCartaoView.setVisible(true);
-
-			}
-		});
-		menu.add(item);
-
 		item = new JMenuItem("Sócio");
 		item.addActionListener(new AbstractAction() {
 
@@ -107,15 +89,16 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				CadastrarCartaoView cadastrarCartaoView = new CadastrarCartaoView();
+				cadastrarCartaoView.setSize(350, 380);
+				cadastrarCartaoView.setVisible(true);
 
 			}
 		});
 		menu.add(item);
 
 		menuBar.add(menu);
-		
-		
+
 		menu = new JMenu("Editar");
 		item = new JMenuItem("Funcionário");
 		item.addActionListener(new AbstractAction() {
@@ -124,7 +107,11 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				EditarFuncionarioView editarFuncionarioView = new EditarFuncionarioView();
+				editarFuncionarioView.setSize(350, 380);
+				// fica no meio da tela
+				//editarFuncionarioView.setLocationRelativeTo(null);
+				editarFuncionarioView.setVisible(true);				
 			}
 		});
 		menu.add(item);
@@ -136,7 +123,6 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -166,12 +152,12 @@ public class FuncionarioView extends JFrame {
 
 			}
 		});
-		
+
 		menu.add(item);
 		menuBar.add(menu);
-		
+
 		menu = new JMenu("Ajuda");
-		
+
 		menuBar.add(menu);
 		return menuBar;
 	}

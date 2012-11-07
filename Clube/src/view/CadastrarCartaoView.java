@@ -19,9 +19,11 @@ import javax.swing.border.TitledBorder;
 import dao.CartaoDAO;
 import dao.DiasDaSemanaDAO;
 import dao.RegraDAO;
+import dao.SocioDAO;
 import es2.atividade2.model.Cartao;
 import es2.atividade2.model.DiasDaSemana;
 import es2.atividade2.model.Regra;
+import es2.atividade2.model.Socio;
 
 public class CadastrarCartaoView extends JFrame {
 
@@ -29,16 +31,26 @@ public class CadastrarCartaoView extends JFrame {
 
 	private JLabel lblMatricula;
 	private JTextField txtMatricula;
+	private JLabel lblNome;
+	private JTextField txtNome;
+	private JLabel lblMorada;
+	private JTextField txtMorada;
+	private JLabel lblIdade;
+	private JTextField txtIdade;
 	private JLabel lblRegra;
 	private JComboBox cmbxRegra = new JComboBox();
 
 	private JPanel panel;
 	private JPanel panelBotoes;
+	private JPanel panelSocio;
 	private JButton cadastrar;
 	private JButton cancelar;
 	
 	String matricula;
 	int id_regra;
+	String nome;
+	String morada;
+	int idade;
 
 	public CadastrarCartaoView() {
 		montaTela();
@@ -53,6 +65,18 @@ public class CadastrarCartaoView extends JFrame {
 		lblMatricula.setText("Matrícula:");
 		txtMatricula = new JTextField(15);
 
+		lblNome = new JLabel();
+		lblNome.setText("Nome:");
+		txtNome = new JTextField(15);
+
+		lblMorada = new JLabel();
+		lblMorada.setText("Morada:");
+		txtMorada = new JTextField(15);
+
+		lblIdade = new JLabel();
+		lblIdade.setText("Idade:");
+		txtIdade = new JTextField(15);
+		
 		lblRegra = new JLabel();
 		lblRegra.setText("Regra:");
 
@@ -82,14 +106,24 @@ public class CadastrarCartaoView extends JFrame {
 
 		panelBotoes = new JPanel(new GridLayout(1, 2));
 		panelBotoes.setBorder(new TitledBorder("Opções"));
+		
+		panelSocio = new JPanel(new GridLayout(6, 3));
+		panelSocio.setBorder(new TitledBorder("Sócio"));
 
 		panel.add(lblMatricula);
 		panel.add(txtMatricula);
 		panel.add(lblRegra);
 		panel.add(cmbxRegra);
+		panelSocio.add(lblNome);
+		panelSocio.add(txtNome);
+		panelSocio.add(lblMorada);
+		panelSocio.add(txtMorada);
+		panelSocio.add(lblIdade);
+		panelSocio.add(txtIdade);
 		panelBotoes.add(cadastrar);
 		panelBotoes.add(cancelar);
 		add(panel, "North");
+		add(panelSocio, "Center");
 		add(panelBotoes, "South");
 
 	}
@@ -99,8 +133,7 @@ public class CadastrarCartaoView extends JFrame {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
+			public void actionPerformed(ActionEvent e) {				
 					
 					getCampos();
 					
@@ -109,24 +142,31 @@ public class CadastrarCartaoView extends JFrame {
 					cartaoDAO.conectar();
 					regraDAO.conectar();
 					
+					//seleciona regra através da combo
 					Regra r = regraDAO.select(id_regra);
-
+					//Insere Cartao
 					Cartao u = new Cartao(1 ,matricula, r, false);
-					cartaoDAO.insert(u);					
+					cartaoDAO.insert(u);	
 					
+					//Recebe o ultimo objeto Cartão inserido
+					Cartao cartao = cartaoDAO.select(cartaoDAO.getUltimoId());
 					regraDAO.desconectar();
-					cartaoDAO.desconectar();					
+					cartaoDAO.desconectar();
+					
+					//Insere Sócio
+					SocioDAO socioDAO = new SocioDAO();									
+					socioDAO.conectar();
+					Socio s = new Socio(1, nome, morada, idade, cartao);	
+					socioDAO.insert(s);
+					socioDAO.desconectar();
 										
 					limpaCampos();
+					
 					JOptionPane.showMessageDialog(null,
 							"Cartão cadastrado com Sucesso", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
 					
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null,
-							"Não foi possível cadsatrar o Cartão", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				}
+
 
 			}
 		});
@@ -144,6 +184,10 @@ public class CadastrarCartaoView extends JFrame {
 		
 		//Converte este String ID para inteiro					
 		id_regra = Integer.parseInt(strId[0]); 
+		
+		nome = txtNome.getText();
+		morada = txtMorada.getText();
+		idade = Integer.parseInt(txtIdade.getText());
 	}
 	
 	private void limpaCampos() {

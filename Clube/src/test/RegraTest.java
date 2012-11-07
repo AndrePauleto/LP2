@@ -12,7 +12,7 @@ import es2.atividade2.model.Regra;
 
 public class RegraTest {
 
-	/*@Test(expected=IllegalArgumentException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testRegraDAOInsert() {
 		DiasDaSemanaDAO diasDaSemanaDAO = new DiasDaSemanaDAO();
 		RegraDAO regraDAO = new RegraDAO();
@@ -21,14 +21,14 @@ public class RegraTest {
 		
 		DiasDaSemana d = diasDaSemanaDAO.select(3);
 
-		Regra u = new Regra(1, "Teste3", "10:00", "22:00", d, "Ilimitado", 50.50);
+		Regra u = new Regra(1, "Teste4", "10:00", "22:00", d, "Ilimitado", 50.50);
 		regraDAO.insert(u);
 		
-		System.out.println(u);
+		System.out.println(regraDAO.getUltimoId());
 		diasDaSemanaDAO.desconectar();
 		regraDAO.desconectar();		
 		System.out.println("Regra cadastrada com Sucesso!");
-	}*/
+	}
 
 	/*@Test(expected=IllegalArgumentException.class)
 	public void testRegraDAOSelect() {
