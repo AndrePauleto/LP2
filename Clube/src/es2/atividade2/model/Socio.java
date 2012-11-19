@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import dao.LogDAO;
+
 public class Socio extends Pessoa{
 
 	private Cartao cartao;
@@ -32,7 +34,14 @@ public class Socio extends Pessoa{
 		if (acessando != true) {
 			if (validarAcesso()) {
 				getCartao().setAcessando(true);
-				log.add(new Log(this));				
+				
+				LogDAO logDao = new LogDAO();
+				logDao.conectar();
+				Log u = new Log(this);
+				logDao.insert(u);
+				log.add(u);	
+				logDao.desconectar();		
+							
 				return true;
 			}
 		}else{
@@ -139,7 +148,7 @@ public class Socio extends Pessoa{
 		int quantidadePorDia = 0;
 		String numeroAcessoDia = getCartao().getRegra().getNumeroAcessoDia();
 
-		if (numeroAcessoDia == "Ilimitado") {
+		if (numeroAcessoDia == "0") {
 			return true;
 		}
 
