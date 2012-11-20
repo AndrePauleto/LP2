@@ -9,9 +9,10 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import dao.CartaoDAO;
 import dao.LogDAO;
 
-public class Socio extends Pessoa{
+public class Socio extends Pessoa {
 
 	private Cartao cartao;
 	private Set<Log> log = new HashSet<Log>();
@@ -30,30 +31,53 @@ public class Socio extends Pessoa{
 	}
 
 	public boolean acessarGinasio() throws ParseException {
+
 		boolean acessando = getCartao().isAcessando();
 		if (acessando != true) {
 			if (validarAcesso()) {
-				getCartao().setAcessando(true);
-				
+
+				// muda status de Acessando para True
+				CartaoDAO cartaoDao = new CartaoDAO();
+				cartaoDao.conectar();
+				Cartao c = cartaoDao.select(getCartao().getId());
+				c.setAcessando(true);
+				cartaoDao.update(c);
+				cartaoDao.desconectar();
+
+				// Insere Log de entrada
 				LogDAO logDao = new LogDAO();
 				logDao.conectar();
 				Log u = new Log(this);
 				logDao.insert(u);
-				log.add(u);	
-				logDao.desconectar();		
-							
+				log.add(u);
+				logDao.desconectar();
+
 				return true;
 			}
-		}else{
-			sairGinasio();			
+		} else {
+			sairGinasio();
 		}
 		return false;
 	}
-	
-	public void sairGinasio(){
-		getCartao().setAcessando(false);
-		log.add(new Log(this));
-		
+
+	public void sairGinasio() {
+
+		// muda status de Acessando para False
+		CartaoDAO cartaoDao = new CartaoDAO();
+		cartaoDao.conectar();
+		Cartao c = cartaoDao.select(getCartao().getId());
+		c.setAcessando(false);
+		cartaoDao.update(c);
+		cartaoDao.desconectar();
+
+		// Insere Log de entrada
+		LogDAO logDao = new LogDAO();
+		logDao.conectar();
+		Log u = new Log(this);
+		logDao.insert(u);
+		log.add(u);
+		logDao.desconectar();
+
 	}
 
 	private boolean validarAcesso() throws ParseException {
@@ -174,8 +198,4 @@ public class Socio extends Pessoa{
 				+ getIdade() + "]";
 	}
 
-
-
-
-	
 }
