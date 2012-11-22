@@ -17,7 +17,7 @@ import es2.atividade2.model.Regra;
 
 public class CartaoTest {
 
-	/*@Test(expected=IllegalArgumentException.class)
+	/*@Test
 	public void testCartaoDAOInsert() {
 		RegraDAO regraDAO = new RegraDAO();
 		CartaoDAO cartaoDAO = new CartaoDAO();
@@ -35,7 +35,7 @@ public class CartaoTest {
 		System.out.println("Cartao cadastrada com Sucesso!");
 	}*/
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testCartaoDAOSelect() {
 		
 		CartaoDAO cartaoDAO = new CartaoDAO();

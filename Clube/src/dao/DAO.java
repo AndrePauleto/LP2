@@ -8,9 +8,6 @@ import java.sql.Statement;
 import java.util.Collection;
 import java.util.Properties;
 
-import es2.atividade2.model.DiasDaSemana;
-import es2.atividade2.model.Funcionario;
-
 
 public abstract class DAO<T> {
 
@@ -19,7 +16,8 @@ public abstract class DAO<T> {
     protected String user = "postgres";
     protected String psw = "senacrs";
     protected Connection con;
-    protected Properties p;
+    //TODO: Substituir variaveis de conexão por uma Properties;
+    //protected Properties p;
     protected PreparedStatement PS_INSERT = null;
     protected String INSERT;
     protected PreparedStatement PS_SELECT = null;
@@ -39,11 +37,12 @@ public abstract class DAO<T> {
 
         if (con == null) {
             try {
-                Class.forName(driver).newInstance();
+                
 
                 con = DriverManager.getConnection(url, user, psw);
                 
-
+                //Class.forName(driver).newInstance();
+                
                 PS_INSERT = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
                 PS_SELECT = con.prepareStatement(SELECT);
                 PS_SELECT_ID = con.prepareStatement(SELECT_ID);
@@ -53,7 +52,7 @@ public abstract class DAO<T> {
             } catch (SQLException e) {
                 throw new RuntimeException(
                         "Sem acesso ao banco de dados! Erro! " + e.getMessage());
-            } catch (InstantiationException e) {
+            /*} catch (InstantiationException e) {
                 throw new RuntimeException(
                         "Sem acesso ao banco de dados! Erro! " + e.getMessage());
             } catch (ClassNotFoundException e) {
@@ -61,7 +60,7 @@ public abstract class DAO<T> {
                         "Sem acesso ao banco de dados! Erro! " + e.getMessage());
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(
-                        "Sem acesso ao banco de dados! Erro! " + e.getMessage());
+                        "Sem acesso ao banco de dados! Erro! " + e.getMessage());*/
             }
 
         }
@@ -69,10 +68,7 @@ public abstract class DAO<T> {
     }
     
     public boolean desconectar() {
-        try {
-        	if(con != null)
-        		con.close();
-        	
+        try {        	
             if(PS_INSERT != null)
             	PS_INSERT.close();
             
@@ -86,7 +82,10 @@ public abstract class DAO<T> {
             	PS_DELETE.close();
             
             if(PS_SELECT_ID != null)
-            	PS_SELECT_ID.close();           	
+            	PS_SELECT_ID.close(); 
+            
+        	if(con != null)
+        		con.close();
             
         } catch (Exception e) {
             throw new RuntimeException("Erro ao fechar conexão Erro! "

@@ -11,7 +11,7 @@ import es2.atividade2.model.Funcionario;
 
 public class DiasDaSemanaTest {
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testDiasDaSemanaDAOInsert() {
 		DiasDaSemanaDAO diasDaSemanaDAO = new DiasDaSemanaDAO();
 		diasDaSemanaDAO.conectar();

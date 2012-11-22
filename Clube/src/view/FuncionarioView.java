@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -41,7 +42,9 @@ public class FuncionarioView extends JFrame {
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showConfirmDialog(null,"Deseja sair do programa", "Info Sys" , JOptionPane.YES_NO_OPTION) == 0) {
+				if (JOptionPane.showConfirmDialog(null,
+						"Deseja sair do programa", "Info Sys",
+						JOptionPane.YES_NO_OPTION) == 0) {
 					dispose();
 				}
 			}
@@ -51,8 +54,7 @@ public class FuncionarioView extends JFrame {
 		menuBar.add(menu);
 
 		menu = new JMenu("Cadastrar");
-		item = new JMenuItem("Funcionário");
-		item.addActionListener(new AbstractAction() {
+		item = new JMenuItem(new AbstractAction("Funcionário") {
 
 			private static final long serialVersionUID = 1L;
 
@@ -60,6 +62,8 @@ public class FuncionarioView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarFuncionarioView cadastrarFuncionarioView = new CadastrarFuncionarioView();
 				cadastrarFuncionarioView.setSize(350, 200);
+				cadastrarFuncionarioView.setIconImage(Toolkit
+						.getDefaultToolkit().getImage("icone.jpeg"));
 				cadastrarFuncionarioView.setVisible(true);
 				// cadastrarFuncionarioView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -76,6 +80,8 @@ public class FuncionarioView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarRegraView cadastrarRegraView = new CadastrarRegraView();
 				cadastrarRegraView.setSize(620, 280);
+				cadastrarRegraView.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage("icone.jpeg"));
 				cadastrarRegraView.setVisible(true);
 
 			}
@@ -91,6 +97,8 @@ public class FuncionarioView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCartaoView cadastrarCartaoView = new CadastrarCartaoView();
 				cadastrarCartaoView.setSize(350, 380);
+				cadastrarCartaoView.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage("icone.jpeg"));
 				cadastrarCartaoView.setVisible(true);
 
 			}
@@ -109,9 +117,11 @@ public class FuncionarioView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				EditarFuncionarioView editarFuncionarioView = new EditarFuncionarioView();
 				editarFuncionarioView.setSize(350, 380);
+				editarFuncionarioView.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage("icone.jpeg"));
 				// fica no meio da tela
-				//editarFuncionarioView.setLocationRelativeTo(null);
-				editarFuncionarioView.setVisible(true);				
+				// editarFuncionarioView.setLocationRelativeTo(null);
+				editarFuncionarioView.setVisible(true);
 			}
 		});
 		menu.add(item);
@@ -157,6 +167,20 @@ public class FuncionarioView extends JFrame {
 		menuBar.add(menu);
 
 		menu = new JMenu("Ajuda");
+
+		item = new JMenuItem("Sobre");
+		item.addActionListener(new AbstractAction() {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		menu.add(item);
 
 		menuBar.add(menu);
 		return menuBar;

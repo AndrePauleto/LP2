@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -92,7 +93,8 @@ public class SocioView extends JFrame {
 					}
 
 					AcessoView acessoView = new AcessoView(msg, c);	
-					
+					acessoView.setLocationRelativeTo(null);
+					acessoView.setIconImage(Toolkit.getDefaultToolkit().getImage("icone.jpeg"));
 					//acessoView.setVisible(false);
 
 				} else {
@@ -110,6 +112,8 @@ public class SocioView extends JFrame {
 		try {
 			SocioView frame = new SocioView();
 			frame.setSize(300, 100);
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icone.jpeg"));
+			frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		} catch (Exception e) {

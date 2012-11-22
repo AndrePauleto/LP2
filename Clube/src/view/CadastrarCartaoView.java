@@ -192,5 +192,8 @@ public class CadastrarCartaoView extends JFrame {
 	
 	private void limpaCampos() {
 		txtMatricula.setText("");
+		txtNome.setText("");
+		txtMorada.setText("");
+		txtIdade.setText("");
 	}
 }

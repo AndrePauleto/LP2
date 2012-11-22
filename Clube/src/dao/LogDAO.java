@@ -39,8 +39,8 @@ public class LogDAO extends DAO<es2.atividade2.model.Log>{
 	}
 
 	@Override
-	public boolean update(Log u) {
-		// TODO Auto-generated method stub
+	public boolean update(Log u) {		
+		// TODO ver exceção para avisar que não foi implementado
 		return false;
 	}
 

@@ -15,6 +15,7 @@ public class AcessoView extends JFrame {
 
 	public AcessoView(String msg, Color c) {
 		
+			
 			setVisible(true);
 			setSize(410, 300);
 			setMsg(msg);

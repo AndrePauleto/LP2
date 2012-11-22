@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,8 @@ public class LoginView extends JFrame {
 										
 					FuncionarioView funcionarioView = new FuncionarioView();					
 					funcionarioView.setSize(600, 480);
+					funcionarioView.setIconImage(Toolkit.getDefaultToolkit()
+							  .getImage("icone.jpeg"));
 					funcionarioView.setVisible(true);					
 					funcionarioView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							
@@ -92,6 +95,8 @@ public class LoginView extends JFrame {
 		try {
 			LoginView frame = new LoginView();
 			frame.setSize(300, 100);
+			frame.setIconImage(Toolkit.getDefaultToolkit()
+					  .getImage("icone.jpeg"));
 			frame.setVisible(true);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		} catch (Exception e) {
