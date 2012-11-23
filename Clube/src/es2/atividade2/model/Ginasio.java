@@ -2,8 +2,6 @@ package es2.atividade2.model;
 
 import java.text.ParseException;
 
-import dao.FuncionarioDAO;
-
 public class Ginasio {
 
 	/**
@@ -14,16 +12,16 @@ public class Ginasio {
 
 		DiasDaSemana Todos = new DiasDaSemana(1, true, true, true, true, true,
 				true, true);
-		DiasDaSemana STQQS = new DiasDaSemana(1, true, true, true, true, true,
-				false, false);
-		DiasDaSemana STQQ = new DiasDaSemana(1, true, true, true, true, false,
-				false, false);
+		/*DiasDaSemana STQQS = new DiasDaSemana(1, true, true, true, true, true,
+				false, false);*/
+		/*DiasDaSemana STQQ = new DiasDaSemana(1, true, true, true, true, false,
+				false, false);*/
 		DiasDaSemana STQ = new DiasDaSemana(1, true, true, true, false, false,
 				false, false);
 
 		Regra Premium = new Regra(1,"Premium", "09:00", "23:00", Todos, "Ilimitado", 50.00);
-		Regra Gold = new Regra(2,"Gold", "11:00", "20:00", STQQS, "3", 40.00);
-		Regra Silver = new Regra(3,"Silver", "12:00", "18:00", STQQ, "2", 30.00);
+		//Regra Gold = new Regra(2,"Gold", "11:00", "20:00", STQQS, "3", 40.00);
+		//Regra Silver = new Regra(3,"Silver", "12:00", "18:00", STQQ, "2", 30.00);
 		Regra Bronze = new Regra(4,"Bronze", "13:00", "16:00", STQ, "1", 10.00);
 
 		Cartao cPremium = new Cartao(1, "011001/2012", Premium, false);

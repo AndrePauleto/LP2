@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -50,24 +49,25 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 	boolean saturday = true;
 	boolean sunday = true;
 
-	//FIXME mudar de TextField para ComboBox os campos Hora Inicial e Hora Final
+	// FIXME mudar de TextField para ComboBox os campos Hora Inicial e Hora
+	// Final
 	private JLabel lblNomeCartao;
 	private JLabel lblHoraInicial;
 	private JLabel lblHoraFinal;
 	private JLabel lblNumeroAcessoDia;
 	private JLabel lblValor;
-	private JTextField txtNomeCartao;	
+	private JTextField txtNomeCartao;
 	private JTextField txtHoraInicial;
 	private JTextField txtHoraFinal;
 	private JTextField txtNumeroAcessoDia;
 	private JTextField txtValor;
-	
+
 	String nomeCartao;
 	String horaInicial;
 	String horaFinal;
 	String numeroAcessoDia;
 	Double valor;
-	
+
 	private JPanel panel;
 
 	private JButton cadastrar;
@@ -82,7 +82,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 
 		setTitle("SysClub - Cadastra Regra");
 
-		//---------- Instancia CheckBox ------------
+		// ---------- Instancia CheckBox ------------
 		cbxSegunda = new JCheckBox("Segunda");
 		cbxSegunda.setMnemonic(KeyEvent.VK_S);
 		cbxSegunda.setSelected(true);
@@ -118,38 +118,35 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		cbxDomingo.setSelected(true);
 		cbxDomingo.addItemListener(this);
 
-		
-		//---------- Instancia Label/TextField------------
+		// ---------- Instancia Label/TextField------------
 		lblNomeCartao = new JLabel();
 		lblNomeCartao.setText("Nome do Cartão:");
 		txtNomeCartao = new JTextField(15);
-		
+
 		lblHoraInicial = new JLabel();
 		lblHoraInicial.setText("Hora Inicial:");
 		txtHoraInicial = new JTextField(15);
-		
+
 		lblHoraFinal = new JLabel();
 		lblHoraFinal.setText("Hora Final:");
 		txtHoraFinal = new JTextField(15);
-		
+
 		lblNumeroAcessoDia = new JLabel();
 		lblNumeroAcessoDia.setText("Nº Acesso/Dia:");
 		txtNumeroAcessoDia = new JTextField(15);
-		
+
 		lblValor = new JLabel();
 		lblValor.setText("Valor:");
 		txtValor = new JTextField(15);
-		
-		
-		//---------- Instancia Botões ------------
+
+		// ---------- Instancia Botões ------------
 		cadastrar = new JButton("Cadastrar");
 		cancelar = new JButton("Cancelar");
 		this.getRootPane().setDefaultButton(cadastrar);
-		
-		
-		//------------ Preenche dados nos paineis --------------
-		JPanel fundo = new JPanel();		
-		
+
+		// ------------ Preenche dados nos paineis --------------
+		JPanel fundo = new JPanel();
+
 		JPanel checkPanel = new JPanel(new GridLayout(4, 2));
 		checkPanel.setBorder(new TitledBorder("Dias Da Semana"));
 		checkPanel.add(cbxSegunda);
@@ -159,9 +156,9 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		checkPanel.add(cbxSexta);
 		checkPanel.add(cbxSabado);
 		checkPanel.add(cbxDomingo);
-		
+
 		fundo.add(checkPanel, BorderLayout.WEST);
-		
+
 		panel = new JPanel(new GridLayout(7, 2));
 		panel.setBorder(new TitledBorder("Regra"));
 		panel.add(lblNomeCartao);
@@ -175,7 +172,6 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		panel.add(lblValor);
 		panel.add(txtValor);
 
-		
 		fundo.add(panel, BorderLayout.EAST);
 		fundo.add(cadastrar);
 		fundo.add(cancelar);
@@ -186,7 +182,6 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 		int index = 0;
 		Object source = e.getItemSelectable();
-		
 
 		if (source == cbxSegunda) {
 			index = 0;
@@ -220,27 +215,28 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+
 					DiasDaSemanaDAO diasDaSemanaDAO = new DiasDaSemanaDAO();
-					DiasDaSemana u = new DiasDaSemana(1, monday, tuesday, wednesday,
-							thursday, friday, saturday, sunday);
+					DiasDaSemana u = new DiasDaSemana(1, monday, tuesday,
+							wednesday, thursday, friday, saturday, sunday);
 					diasDaSemanaDAO.conectar();
-					diasDaSemanaDAO.insert(u);						
-					DiasDaSemana d = diasDaSemanaDAO.select(diasDaSemanaDAO.getUltimoId());
+					diasDaSemanaDAO.insert(u);
+					DiasDaSemana d = diasDaSemanaDAO.select(diasDaSemanaDAO
+							.getUltimoId());
 					diasDaSemanaDAO.desconectar();
-					
+
 					getCampos();
-					
-					
+
 					RegraDAO regraDAO = new RegraDAO();
-					 
-					Regra r = new Regra(1, nomeCartao, horaInicial, horaFinal, d, numeroAcessoDia, valor);
+
+					Regra r = new Regra(1, nomeCartao, horaInicial, horaFinal,
+							d, numeroAcessoDia, valor);
 					regraDAO.conectar();
 					regraDAO.insert(r);
-					regraDAO.desconectar();					
-					
+					regraDAO.desconectar();
+
 					limpaCampos();
-					
+
 					JOptionPane.showMessageDialog(null,
 							"Regra cadastrada com Sucesso", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -253,7 +249,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		});
 
 	}
-	
+
 	private void getCampos() {
 		nomeCartao = txtNomeCartao.getText();
 		horaInicial = txtHoraInicial.getText();
@@ -262,7 +258,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		valor = Double.parseDouble(txtValor.getText());
 
 	}
-	
+
 	private void limpaCampos() {
 		txtNomeCartao.setText("");
 		txtHoraInicial.setText("");

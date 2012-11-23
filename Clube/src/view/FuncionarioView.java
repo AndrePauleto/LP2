@@ -175,7 +175,11 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				JOptionPane
+						.showMessageDialog(
+								null,
+								"Sistema de Controle de Acesso a Clube \nVersão: 1.0 \nFeito por: André Pauleto Mello",
+								"Sobre", JOptionPane.INFORMATION_MESSAGE);
 
 			}
 		});

@@ -1,12 +1,12 @@
 package es2.atividade2.model;
 
 public class Cartao {
-		
+
 	private String matricula;
 	private Regra regra;
 	private boolean acessando;
 	private int id;
-	
+
 	public Cartao(int id, String matricula, Regra regra, boolean acessando) {
 		super();
 		setId(id);
@@ -29,8 +29,8 @@ public class Cartao {
 
 	public void setRegra(Regra regra) {
 		this.regra = regra;
-	}	
-	
+	}
+
 	public boolean isAcessando() {
 		return acessando;
 	}
@@ -38,7 +38,7 @@ public class Cartao {
 	public void setAcessando(boolean acessando) {
 		this.acessando = acessando;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -50,10 +50,7 @@ public class Cartao {
 	@Override
 	public String toString() {
 		return "Cartao [matricula=" + matricula + ", regra=" + regra
-				+ ", acessando=" + acessando + "]";	}
+				+ ", acessando=" + acessando + "]";
+	}
 
-
-
-	
-	
 }

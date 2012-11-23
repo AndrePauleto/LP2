@@ -1,52 +1,46 @@
 package view;
 
-import java.awt.FlowLayout;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import dao.FuncionarioDAO;
 import es2.atividade2.model.Funcionario;
 
-public class EditarFuncionarioView extends JFrame{
+public class EditarFuncionarioView extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	String[] colunas = { "Nome", "Morada", "Login", "Senha" };
+	String[] colunas = { "id", "Nome", "Idade", "Morada", "Login", "Senha" };
 	String[][] dados;
-	private JPanel tabela;
+
+	DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
+
+	JTable jtable = new JTable(modelo);
 
 	public EditarFuncionarioView() {
-		montaTabela();
+		adicionaLinha();
+		add(jtable);
 	}
 
-	private void preencheDados() {
+	public void adicionaLinha() {
 
-		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-		funcionarioDAO.conectar();
-		List<Funcionario> funcionarios = new ArrayList<Funcionario>(
-				funcionarioDAO.select());
-		funcionarioDAO.desconectar();
+		// Obtem o modelo da JTable
+		DefaultTableModel modelo = (DefaultTableModel) jtable.getModel();
+		// preencherComboBox();
+		FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+		funcionarioDao.conectar();
+		Collection<Funcionario> funcionarioCol = funcionarioDao.select();
 
-		for (Funcionario f : funcionarios) {
-			dados = new String[][] { { f.getNome(), f.getMorada(),
-					f.getLogin(), f.getSenha() } };
+		for (Funcionario f : funcionarioCol) {
+			modelo.addRow(new String[] { "'" + f.getId() + "'",
+					"'" + f.getIdade() + "'", "'" + f.getNome() + "'",
+					"'" + f.getMorada() + "'", "'" + f.getLogin() + "'",
+					"'" + f.getSenha() + "'" });
 		}
-	}
 
-	private JPanel montaTabela() {
-		preencheDados();
-		DefaultTableModel modelo = new DefaultTableModel(dados, colunas);
+		funcionarioDao.desconectar();
 
-		JTable jtable = new JTable(modelo);
-		
-		tabela = new JPanel(new FlowLayout(FlowLayout.CENTER));  
-		tabela.add(jtable);  
-        add(tabela);
-        
-        return tabela;
 	}
 }

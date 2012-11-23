@@ -14,18 +14,16 @@ public class AcessoView extends JFrame {
 	private JLabel mensagem;
 
 	public AcessoView(String msg, Color c) {
-		
-			
-			setVisible(true);
-			setSize(410, 300);
-			setMsg(msg);
-			mensagem = new JLabel(msg);
-			mensagem.setFont(new Font("Arial", Font.BOLD, 26));
-			mensagem.setForeground(Color.white);
 
-			add(mensagem, BorderLayout.CENTER);
-			getContentPane().setBackground(c);
-			
+		setVisible(true);
+		setSize(410, 300);
+		setMsg(msg);
+		mensagem = new JLabel(msg);
+		mensagem.setFont(new Font("Arial", Font.BOLD, 26));
+		mensagem.setForeground(Color.white);
+
+		add(mensagem, BorderLayout.CENTER);
+		getContentPane().setBackground(c);
 
 	}
 

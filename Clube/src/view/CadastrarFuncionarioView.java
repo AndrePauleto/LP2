@@ -66,11 +66,11 @@ public class CadastrarFuncionarioView extends JFrame {
 		lblSenha = new JLabel();
 		lblSenha.setText("Senha:");
 		txtSenha = new JPasswordField(15);
-		 
+
 		cadastrar = new JButton("Cadastrar");
 		cancelar = new JButton("Cancelar");
-		this.getRootPane().setDefaultButton(cadastrar); 
-		
+		this.getRootPane().setDefaultButton(cadastrar);
+
 		panel = new JPanel(new GridLayout(6, 1));
 		panel.add(lblNome);
 		panel.add(txtNome);
@@ -103,9 +103,9 @@ public class CadastrarFuncionarioView extends JFrame {
 							login, senha);
 					funcionarioDAO.insert(f);
 					funcionarioDAO.desconectar();
-					
+
 					limpaCampos();
-					
+
 					JOptionPane.showMessageDialog(null,
 							"Funcionário Cadastrado com Sucesso", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -122,7 +122,7 @@ public class CadastrarFuncionarioView extends JFrame {
 	}
 
 	private void acaoBotaoCancelar() {
-		
+
 		cancelar.addActionListener(new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
@@ -132,7 +132,6 @@ public class CadastrarFuncionarioView extends JFrame {
 			}
 		});
 
-		
 	}
 
 	private void getCampos() {

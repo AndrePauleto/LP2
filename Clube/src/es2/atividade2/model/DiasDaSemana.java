@@ -5,15 +5,16 @@ public class DiasDaSemana {
 	private boolean monday;
 	private boolean tuesday;
 	private boolean wednesday;
-	private boolean	thursday;
-	private boolean	friday;
-	private boolean	saturday;
+	private boolean thursday;
+	private boolean friday;
+	private boolean saturday;
 	private boolean sunday;
 	private int id;
-	
-	public DiasDaSemana(int id, boolean monday, boolean tuesday, boolean wednesday,
-			boolean thursday, boolean friday, boolean saturday, boolean sunday) {
-		
+
+	public DiasDaSemana(int id, boolean monday, boolean tuesday,
+			boolean wednesday, boolean thursday, boolean friday,
+			boolean saturday, boolean sunday) {
+
 		setMonday(monday);
 		setTuesday(tuesday);
 		setWednesday(wednesday);
@@ -80,7 +81,7 @@ public class DiasDaSemana {
 	public void setSunday(boolean sunday) {
 		this.sunday = sunday;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -97,7 +98,4 @@ public class DiasDaSemana {
 				+ sunday + "]";
 	}
 
-	
-	
-	
 }

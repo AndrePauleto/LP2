@@ -62,14 +62,12 @@ public class SocioView extends JFrame {
 
 				for (Socio s : socios) {
 					if (socio.equals(s.getCartao().getMatricula())) {
-						System.out.println(s);
+
 						flag = true;
 						socioSelecionado = s;
 						break;
 					}
 				}
-
-				System.out.println(socioSelecionado);
 
 				if (flag) {
 
@@ -92,10 +90,11 @@ public class SocioView extends JFrame {
 						c = Color.green;
 					}
 
-					AcessoView acessoView = new AcessoView(msg, c);	
+					AcessoView acessoView = new AcessoView(msg, c);
 					acessoView.setLocationRelativeTo(null);
-					acessoView.setIconImage(Toolkit.getDefaultToolkit().getImage("icone.jpeg"));
-					//acessoView.setVisible(false);
+					acessoView.setIconImage(Toolkit.getDefaultToolkit()
+							.getImage("icone.jpeg"));
+					// acessoView.setVisible(false);
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Matricula incorreta",
@@ -112,7 +111,8 @@ public class SocioView extends JFrame {
 		try {
 			SocioView frame = new SocioView();
 			frame.setSize(300, 100);
-			frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icone.jpeg"));
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
+					"icone.jpeg"));
 			frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

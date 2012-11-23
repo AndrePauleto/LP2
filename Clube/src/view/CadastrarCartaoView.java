@@ -2,11 +2,9 @@ package view;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.AbstractAction;
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,13 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import dao.CartaoDAO;
-import dao.DiasDaSemanaDAO;
 import dao.RegraDAO;
 import dao.SocioDAO;
 import es2.atividade2.model.Cartao;
-import es2.atividade2.model.DiasDaSemana;
 import es2.atividade2.model.Regra;
 import es2.atividade2.model.Socio;
 
@@ -45,7 +42,7 @@ public class CadastrarCartaoView extends JFrame {
 	private JPanel panelSocio;
 	private JButton cadastrar;
 	private JButton cancelar;
-	
+
 	String matricula;
 	int id_regra;
 	String nome;
@@ -76,7 +73,7 @@ public class CadastrarCartaoView extends JFrame {
 		lblIdade = new JLabel();
 		lblIdade.setText("Idade:");
 		txtIdade = new JTextField(15);
-		
+
 		lblRegra = new JLabel();
 		lblRegra.setText("Regra:");
 
@@ -106,7 +103,7 @@ public class CadastrarCartaoView extends JFrame {
 
 		panelBotoes = new JPanel(new GridLayout(1, 2));
 		panelBotoes.setBorder(new TitledBorder("Opções"));
-		
+
 		panelSocio = new JPanel(new GridLayout(6, 3));
 		panelSocio.setBorder(new TitledBorder("Sócio"));
 
@@ -133,63 +130,83 @@ public class CadastrarCartaoView extends JFrame {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {				
-					
-					getCampos();
-					
+			public void actionPerformed(ActionEvent e) {
+
+				getCampos();
+
+				if (validaCampos()) {
+
 					RegraDAO regraDAO = new RegraDAO();
 					CartaoDAO cartaoDAO = new CartaoDAO();
 					cartaoDAO.conectar();
 					regraDAO.conectar();
-					
-					//seleciona regra através da combo
+
+					// seleciona regra através da combo
 					Regra r = regraDAO.select(id_regra);
-					//Insere Cartao
-					Cartao u = new Cartao(1 ,matricula, r, false);
-					cartaoDAO.insert(u);	
-					
-					//Recebe o ultimo objeto Cartão inserido
+					// Insere Cartao
+					Cartao u = new Cartao(1, matricula, r, false);
+					cartaoDAO.insert(u);
+
+					// Recebe o ultimo objeto Cartão inserido
 					Cartao cartao = cartaoDAO.select(cartaoDAO.getUltimoId());
 					regraDAO.desconectar();
 					cartaoDAO.desconectar();
-					
-					//Insere Sócio
-					SocioDAO socioDAO = new SocioDAO();									
+
+					// Insere Sócio
+					SocioDAO socioDAO = new SocioDAO();
 					socioDAO.conectar();
-					Socio s = new Socio(1, nome, morada, idade, cartao);	
+					Socio s = new Socio(1, nome, morada, idade, cartao);
 					socioDAO.insert(s);
 					socioDAO.desconectar();
-										
+
 					limpaCampos();
-					
+
 					JOptionPane.showMessageDialog(null,
 							"Cartão cadastrado com Sucesso", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
-					
-
-
+				}
 			}
 		});
 
 	}
-	
+
 	private void getCampos() {
 		matricula = txtMatricula.getText();
-		
-		//recebe valor da combo box
+
+		// recebe valor da combo box
 		String cmbxSelecionado = (String) cmbxRegra.getSelectedItem();
-		
-		//Utiliza o "-" como separador para obeter a String ID
+
+		// Utiliza o "-" como separador para obeter a String ID
 		String[] strId = cmbxSelecionado.split(" -");
-		
-		//Converte este String ID para inteiro					
-		id_regra = Integer.parseInt(strId[0]); 
-		
+
+		// Converte este String ID para inteiro
+		id_regra = Integer.parseInt(strId[0]);
+
 		nome = txtNome.getText();
 		morada = txtMorada.getText();
 		idade = Integer.parseInt(txtIdade.getText());
 	}
-	
+
+	private boolean validaCampos() {
+
+		CartaoDAO cartaoDao = new CartaoDAO();
+		cartaoDao.conectar();
+
+		Collection<Cartao> c = cartaoDao.select();
+		for (Cartao cartao : c) {
+
+			if (matricula.equals(cartao.getMatricula())) {
+				JOptionPane.showMessageDialog(null, "Matrícula já existe.",
+						"Aviso", JOptionPane.INFORMATION_MESSAGE);
+				return false;
+			}
+		}
+		cartaoDao.desconectar();
+
+		return true;
+
+	}
+
 	private void limpaCampos() {
 		txtMatricula.setText("");
 		txtNome.setText("");
