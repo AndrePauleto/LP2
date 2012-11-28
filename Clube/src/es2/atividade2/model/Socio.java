@@ -14,12 +14,22 @@ import dao.LogDAO;
 
 public class Socio extends Pessoa {
 
+	private int quantidadePorDia = 0;
 	private Cartao cartao;
 	private Set<Log> log = new HashSet<Log>();
 
 	public Socio(int id, String nome, String morada, int idade, Cartao cartao) {
 		super(id, nome, morada, idade);
 		setCartao(cartao);
+		setQuantidadePorDia(0);
+	}
+
+	public int getQuantidadePorDia() {
+		return quantidadePorDia;
+	}
+
+	public void setQuantidadePorDia(int quantidadePorDia) {
+		this.quantidadePorDia = quantidadePorDia;
 	}
 
 	public Cartao getCartao() {
@@ -169,18 +179,19 @@ public class Socio extends Pessoa {
 		Date dataAtual = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		String dataAtualStr = formato.format(dataAtual);
-		int quantidadePorDia = 0;
+
 		String numeroAcessoDia = getCartao().getRegra().getNumeroAcessoDia();
 
 		if (numeroAcessoDia == "0") {
 			return true;
 		}
 
-		if (log != null) {
+		if (log != null) {			
 			for (Log l : log) {
 				String dataLog = l.getData();
 				if (dataAtualStr.equals(dataLog)) {
-					quantidadePorDia++;
+					setQuantidadePorDia(getQuantidadePorDia() + 1);
+
 				}
 			}
 		}

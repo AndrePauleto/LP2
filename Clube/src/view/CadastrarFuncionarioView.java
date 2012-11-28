@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import dao.FuncionarioDAO;
 import es2.atividade2.model.Funcionario;
@@ -20,7 +21,8 @@ public class CadastrarFuncionarioView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JButton cadastrar;
 	private JButton cancelar;
-	private JPanel panel;
+	private JPanel panelBotoes;
+	private JPanel panelFuncionario;
 	private JLabel lblNome;
 	private JLabel lblMorada;
 	private JLabel lblIdade;
@@ -71,20 +73,27 @@ public class CadastrarFuncionarioView extends JFrame {
 		cancelar = new JButton("Cancelar");
 		this.getRootPane().setDefaultButton(cadastrar);
 
-		panel = new JPanel(new GridLayout(6, 1));
-		panel.add(lblNome);
-		panel.add(txtNome);
-		panel.add(lblMorada);
-		panel.add(txtMorada);
-		panel.add(lblIdade);
-		panel.add(txtIdade);
-		panel.add(lblUsuario);
-		panel.add(txtUsuario);
-		panel.add(lblSenha);
-		panel.add(txtSenha);
-		panel.add(cadastrar);
-		panel.add(cancelar);
-		add(panel, BorderLayout.CENTER);
+		panelBotoes = new JPanel(new GridLayout(1, 2));
+		panelBotoes.setBorder(new TitledBorder("Opções"));
+
+		panelFuncionario = new JPanel(new GridLayout(10, 3));
+		panelFuncionario.setBorder(new TitledBorder("Funcionário"));
+
+		panelFuncionario.add(lblNome);
+		panelFuncionario.add(txtNome);
+		panelFuncionario.add(lblMorada);
+		panelFuncionario.add(txtMorada);
+		panelFuncionario.add(lblIdade);
+		panelFuncionario.add(txtIdade);
+		panelFuncionario.add(lblUsuario);
+		panelFuncionario.add(txtUsuario);
+		panelFuncionario.add(lblSenha);
+		panelFuncionario.add(txtSenha);
+		panelBotoes.add(cadastrar);
+		panelBotoes.add(cancelar);
+
+		add(panelFuncionario, "North");
+		add(panelBotoes, "South");
 	}
 
 	private void acaoBotaoCadastrar() {

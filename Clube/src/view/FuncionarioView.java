@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 public class FuncionarioView extends JFrame {
 
@@ -17,6 +20,35 @@ public class FuncionarioView extends JFrame {
 	public FuncionarioView() {
 
 		setJMenuBar(Menu());
+		fecharJanela();
+	}
+
+	private void fecharJanela() {
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+
+					if (JOptionPane.showConfirmDialog(null,
+							"Deseja sair do programa", "Info Sys",
+							JOptionPane.YES_NO_OPTION) == 0) {
+						LoginView frame = new LoginView();
+						frame.setSize(300, 100);
+						frame.setLocationRelativeTo(null);
+						frame.setIconImage(Toolkit.getDefaultToolkit()
+								.getImage("icone.jpeg"));
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+						dispose();
+					} else {
+						setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+					}
+				}
+			}
+
+		});
 	}
 
 	private JMenuBar Menu() {
@@ -28,11 +60,12 @@ public class FuncionarioView extends JFrame {
 
 		item = new JMenuItem("Principal");
 		item.addActionListener(new AbstractAction() {
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				JOptionPane.showMessageDialog(null, "Em desenvolvimento.. ",
+						"Aviso", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		menu.add(item);
@@ -45,6 +78,15 @@ public class FuncionarioView extends JFrame {
 				if (JOptionPane.showConfirmDialog(null,
 						"Deseja sair do programa", "Info Sys",
 						JOptionPane.YES_NO_OPTION) == 0) {
+
+					LoginView frame = new LoginView();
+					frame.setSize(300, 100);
+					frame.setLocationRelativeTo(null);
+					frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
+							"icone.jpeg"));
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 					dispose();
 				}
 			}
@@ -61,7 +103,8 @@ public class FuncionarioView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CadastrarFuncionarioView cadastrarFuncionarioView = new CadastrarFuncionarioView();
-				cadastrarFuncionarioView.setSize(350, 200);
+				cadastrarFuncionarioView.setSize(350, 320);
+				cadastrarFuncionarioView.setLocationRelativeTo(null);
 				cadastrarFuncionarioView.setIconImage(Toolkit
 						.getDefaultToolkit().getImage("icone.jpeg"));
 				cadastrarFuncionarioView.setVisible(true);
@@ -79,7 +122,8 @@ public class FuncionarioView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				CadastrarRegraView cadastrarRegraView = new CadastrarRegraView();
-				cadastrarRegraView.setSize(620, 280);
+				cadastrarRegraView.setSize(560, 280);
+				cadastrarRegraView.setLocationRelativeTo(null);
 				cadastrarRegraView.setIconImage(Toolkit.getDefaultToolkit()
 						.getImage("icone.jpeg"));
 				cadastrarRegraView.setVisible(true);
@@ -97,6 +141,7 @@ public class FuncionarioView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCartaoView cadastrarCartaoView = new CadastrarCartaoView();
 				cadastrarCartaoView.setSize(350, 380);
+				cadastrarCartaoView.setLocationRelativeTo(null);
 				cadastrarCartaoView.setIconImage(Toolkit.getDefaultToolkit()
 						.getImage("icone.jpeg"));
 				cadastrarCartaoView.setVisible(true);
@@ -116,11 +161,10 @@ public class FuncionarioView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EditarFuncionarioView editarFuncionarioView = new EditarFuncionarioView();
-				editarFuncionarioView.setSize(350, 380);
+				editarFuncionarioView.setSize(650, 380);
+				editarFuncionarioView.setLocationRelativeTo(null);
 				editarFuncionarioView.setIconImage(Toolkit.getDefaultToolkit()
 						.getImage("icone.jpeg"));
-				// fica no meio da tela
-				// editarFuncionarioView.setLocationRelativeTo(null);
 				editarFuncionarioView.setVisible(true);
 			}
 		});
@@ -133,7 +177,12 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				EditarRegraView editarRegraView = new EditarRegraView();
+				editarRegraView.setSize(650, 380);
+				editarRegraView.setLocationRelativeTo(null);
+				editarRegraView.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage("icone.jpeg"));
+				editarRegraView.setVisible(true);
 			}
 		});
 		menu.add(item);
@@ -145,7 +194,12 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				EditarCartaoView editarCartaoView = new EditarCartaoView();
+				editarCartaoView.setSize(650, 380);
+				editarCartaoView.setLocationRelativeTo(null);
+				editarCartaoView.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage("icone.jpeg"));
+				editarCartaoView.setVisible(true);
 
 			}
 		});
@@ -158,7 +212,12 @@ public class FuncionarioView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				EditarSocioView editarSocioView = new EditarSocioView();
+				editarSocioView.setSize(650, 380);
+				editarSocioView.setLocationRelativeTo(null);
+				editarSocioView.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage("icone.jpeg"));
+				editarSocioView.setVisible(true);
 
 			}
 		});
@@ -180,7 +239,6 @@ public class FuncionarioView extends JFrame {
 								null,
 								"Sistema de Controle de Acesso a Clube \nVersão: 1.0 \nFeito por: André Pauleto Mello",
 								"Sobre", JOptionPane.INFORMATION_MESSAGE);
-
 			}
 		});
 

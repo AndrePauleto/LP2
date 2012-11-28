@@ -72,15 +72,13 @@ public class LoginView extends JFrame {
 				}
 
 				if (flag) {
-
+					dispose();
 					FuncionarioView funcionarioView = new FuncionarioView();
-					funcionarioView.setSize(600, 480);
+					funcionarioView.setSize(300, 280);
 					funcionarioView.setLocationRelativeTo(null);
 					funcionarioView.setIconImage(Toolkit.getDefaultToolkit()
 							.getImage("icone.jpeg"));
-					funcionarioView.setVisible(true);
-					funcionarioView
-							.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					funcionarioView.setVisible(true);					
 
 				} else {
 					JOptionPane.showMessageDialog(null,
