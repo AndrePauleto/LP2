@@ -38,7 +38,7 @@ public class EditarCartaoView extends JFrame {
 			modelo.addRow(new String[] { "'" + cartao.getId() + "'",
 					"'" + cartao.getMatricula() + "'",
 					"'" + cartao.isAcessando() + "'",
-					"'" + cartao.getRegra().getId() + "'" });
+					"'" + cartao.getRegra().getNomeCartao() + "'" });
 		}
 
 		cartaoDao.desconectar();

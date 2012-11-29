@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.CardLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -11,12 +12,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
+import swing.action.JDepositarMenuAction;
 
 public class FuncionarioView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	CardLayout cards = new CardLayout();	
+	JPanel principal = new JPanel(cards);
+	
 	public FuncionarioView() {
 
 		setJMenuBar(Menu());
@@ -55,7 +62,9 @@ public class FuncionarioView extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		JMenuItem item;
 		JMenu menu;
-
+		JPanel funcionario = new CadastrarFuncionarioView(principal, cards);
+		principal.add(funcionario, JCadastrarFuncionarioMenuAction.DEPOSITAR1);
+		
 		menu = new JMenu("Arquivo");
 
 		item = new JMenuItem("Principal");
@@ -101,13 +110,16 @@ public class FuncionarioView extends JFrame {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				CadastrarFuncionarioView cadastrarFuncionarioView = new CadastrarFuncionarioView();
-				cadastrarFuncionarioView.setSize(350, 320);
-				cadastrarFuncionarioView.setLocationRelativeTo(null);
-				cadastrarFuncionarioView.setIconImage(Toolkit
-						.getDefaultToolkit().getImage("icone.jpeg"));
-				cadastrarFuncionarioView.setVisible(true);
+			public void actionPerformed(ActionEvent e) {				
+				//CadastrarFuncionarioView cadastrarFuncionarioView = new CadastrarFuncionarioView();
+				//cadastrarFuncionarioView.setSize(350, 320);
+				//cadastrarFuncionarioView.setLocationRelativeTo(null);
+				//cadastrarFuncionarioView.setIconImage(Toolkit
+						//.getDefaultToolkit().getImage("icone.jpeg"));
+				//cadastrarFuncionarioView.setVisible(true);
+								
+				cards.show(principal, "Funcionario");
+
 				// cadastrarFuncionarioView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 			}

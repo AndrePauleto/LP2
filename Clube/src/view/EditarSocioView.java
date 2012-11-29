@@ -38,7 +38,7 @@ public class EditarSocioView extends JFrame {
 			modelo.addRow(new String[] { "'" + socio.getId() + "'",
 					"'" + socio.getNome() + "'", "'" + socio.getMorada() + "'",
 					"'" + socio.getIdade() + "'",
-					"'" + socio.getCartao().getId() + "'" });
+					"'" + socio.getCartao().getMatricula() + "'" });
 		}
 
 		socioDao.desconectar();

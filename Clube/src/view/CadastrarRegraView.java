@@ -136,7 +136,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		txtNumeroAcessoDia = new JTextField(15);
 
 		lblValor = new JLabel();
-		lblValor.setText("Valor:");
+		lblValor.setText("Valor (R$):");
 		txtValor = new JTextField(15);
 
 		// ---------- Instancia Botões ------------
@@ -148,7 +148,7 @@ public class CadastrarRegraView extends JFrame implements ItemListener {
 		JPanel fundo = new JPanel();
 
 		JPanel checkPanel = new JPanel(new GridLayout(4, 2));
-		checkPanel.setBorder(new TitledBorder("Dias Da Semana"));
+		checkPanel.setBorder(new TitledBorder("Dias da Semana"));
 		checkPanel.add(cbxSegunda);
 		checkPanel.add(cbxTerca);
 		checkPanel.add(cbxQuarta);

@@ -112,7 +112,7 @@ public class Socio extends Pessoa {
 
 		data = formatador.parse(horaFinalStr);
 		Time horaFinal = new Time(data.getTime());
-
+		
 		Date HoraSistema = new Date();
 		int hora = HoraSistema.getHours();
 		int minutos = HoraSistema.getMinutes();
@@ -142,6 +142,7 @@ public class Socio extends Pessoa {
 		String diaDaSemanaAtual = objCalendar.getDisplayName(
 				Calendar.DAY_OF_WEEK, Calendar.LONG, objLocale);
 
+		System.out.println(diaDaSemanaAtual);
 		if (segunda) {
 			if (diaDaSemanaAtual == "Segunda-feira")
 				return true;
