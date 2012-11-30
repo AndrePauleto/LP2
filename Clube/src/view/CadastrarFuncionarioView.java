@@ -1,11 +1,11 @@
 package view;
 
-import java.awt.CardLayout;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,7 +16,7 @@ import javax.swing.border.TitledBorder;
 import dao.FuncionarioDAO;
 import es2.atividade2.model.Funcionario;
 
-public class CadastrarFuncionarioView extends JPanel {
+public class CadastrarFuncionarioView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JButton cadastrar;
@@ -39,13 +39,15 @@ public class CadastrarFuncionarioView extends JPanel {
 	private String login;
 	private String senha;
 
-	public CadastrarFuncionarioView(JPanel principal, CardLayout cards) {
+	public CadastrarFuncionarioView() {
 		montaTela();
 		acaoBotaoCadastrar();
 		acaoBotaoCancelar();
 	}
 
-	private void montaTela() {		
+	private void montaTela() {
+
+		setTitle("SysClub - Cadastra Funcionário");
 
 		lblNome = new JLabel();
 		lblNome.setText("Nome:");
@@ -135,7 +137,7 @@ public class CadastrarFuncionarioView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 
